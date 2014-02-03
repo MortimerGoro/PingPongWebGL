@@ -1,3 +1,8 @@
+/* 
+ * PingPongWebGL is licensed under MIT licensed. See LICENSE.md file for more information.
+ * Copyright (c) 2014 MortimerGoro
+*/
+
 'use strict';
 
 (function(){
@@ -38,6 +43,7 @@ PingPong.Physics.prototype = {
         linearVelocity.multiplyScalar(force);
         prevGravity = 0;
         gravityTime = 0;
+        PingPong.Audio.playPaddleSound();
     },
     
     simulate: function(step) {
@@ -89,8 +95,7 @@ PingPong.Physics.prototype = {
         
         var top = sphereInterserctsPlane(0, -1, 0, box.max.y, ball.position, ballRadius);
         var front = sphereInterserctsPlane(0, 0, -1, box.max.z, ball.position, ballRadius);
-        var back = sphereInterserctsPlane(0, 0, 1, box.min.z, ball.position, ballRadius);
-        back = false;
+        //TODO: check remaining planes and handle edge collisions.
 
                 
         if (top) {
@@ -103,9 +108,12 @@ PingPong.Physics.prototype = {
             ball.position.z = box.max.z + ballRadius;  
             linearVelocity.z*= -restitution;
         }
-        else if (back) {
-            ball.position.z = box.min.z - ballRadius;  
-            linearVelocity.z*= -restitution;
+        
+        //TODO: Angular velocity
+
+        
+        if (Math.abs(linearVelocity.y) > 0.001){
+            PingPong.Audio.playBallSound();            
         }
             
     }

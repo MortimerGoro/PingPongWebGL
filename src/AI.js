@@ -1,3 +1,8 @@
+/* 
+ * PingPongWebGL is licensed under MIT licensed. See LICENSE.md file for more information.
+ * Copyright (c) 2014 Imanol Fernandez @MortimerGoro
+*/
+
 'use strict';
 
 (function(){

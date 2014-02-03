@@ -1,3 +1,8 @@
+/* 
+ * PingPongWebGL is licensed under MIT licensed. See LICENSE.md file for more information.
+ * Copyright (c) 2014 Imanol Fernandez @MortimerGoro
+*/
+
 'use strict';
 
 (function(){
@@ -39,6 +44,9 @@ PingPong.GameScene.prototype = {
 		scene.add(camera);
 		camera.position.set(0,this.settings.height/2,this.settings.depth/2);
 		camera.lookAt(scene.position);
+        
+        //initialize audio
+        PingPong.Audio.init(this.settings);
         
         //create physics
         this.simulation = new PingPong.Physics();
