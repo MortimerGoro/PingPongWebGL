@@ -3,7 +3,9 @@ Ping Pong WebGL
 
 A Ping Pong game demo using Three.js and custom physics.
 
-It's a very early version, there are many TODOs:
+Live demo: http://mortimergoro.github.io/PingPongWebGL/
+
+It's a early version, there are many TODOs:
 * Improve physics
 * Improve gameplay
 * Improve ball hit vector
