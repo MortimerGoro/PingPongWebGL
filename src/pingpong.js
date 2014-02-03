@@ -297,6 +297,14 @@ PingPong.GameScene.prototype = {
         //normalize input
         var px = (input.x / screenSize.width ) * 2 - 1;
         var py = - (input.y / screenSize.height ) * 2 + 1; 
+        
+        //set camera position
+        var cx = tableSize.width * 0.5 * px;
+        var cy = tableSize.height * 1.5;// + tableSize.height * 0.3 * py;
+        var cz = tableSize.depth/2 * 3 * Math.abs(py);
+        cz = Math.max(cz, tableSize.depth * 0.3);
+        camera.position.set(cx,cy,cz);
+        camera.lookAt(new THREE.Vector3(0, tableSize.height, 0));
 
         //camera.rotation.y = Math.PI * -0.05 * px;
         
@@ -317,11 +325,7 @@ PingPong.GameScene.prototype = {
         paddle.position.z = intersect.z;
         paddle.position.y = tableSize.height;
         
-        //set camera position
-        var cx = tableSize.width * 0.5 * px;
-        var cy = tableSize.height * 1.5;// + tableSize.height * 0.3 * py;
-        var cz = tableSize.depth/2 * 3 * Math.abs(py);
-        cz = Math.max(cz, tableSize.depth * 0.3);
+
         
         if (state == STATES.SERVING) {
             ball.position.set(paddle.position.x, paddle.position.y + paddleSize.height, paddle.position.z);
@@ -342,11 +346,7 @@ PingPong.GameScene.prototype = {
         paddleAI.rotation.z = Math.PI * 0.5 * dxAI * (paddleAI.position.x > 0 ? 1.0 : -1.0);
         paddleAI.rotation.x = -Math.PI * 0.2 * dxAI;
         paddleAI.rotation.y = Math.PI * 0.2 * dxAI * (paddleAI.position.x > 0 ? -1.0 : 1.0);
-        paddleAI.rotation.y += Math.PI;
-
-        camera.position.set(cx,cy,cz);
-        camera.lookAt(new THREE.Vector3(0, tableSize.height, 0));
-        
+        paddleAI.rotation.y += Math.PI;        
         
     },
     
